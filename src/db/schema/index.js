@@ -1,3 +1,9 @@
-import { drizzle } from 'drizzle-orm/neon-http';
-
-const db = drizzle(process.env.DATABASE_URL);
+export * from "./usuario.schema.js";
+export * from "./time.schema.js";
+export * from "./atleta.schema.js";
+export * from "./posicao.schema.js";
+export * from "./formacao.schema.js";
+export * from "./escalacao.schema.js";
+export * from "./giro.schema.js";
+export * from "./campeonato.schema.js";
+export * from "./partida.schema.js";
