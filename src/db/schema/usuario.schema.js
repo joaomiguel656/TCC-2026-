@@ -3,7 +3,7 @@ import {
     pgTable,
     uuid,
     varchar,
-    timestamp
+    timestamp,
   } from "drizzle-orm/pg-core";
   
   export const usuario = pgTable("usuario", {

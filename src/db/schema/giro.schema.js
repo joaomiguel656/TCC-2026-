@@ -1,6 +1,6 @@
 
-import { escalacao } from "./escalacao.schema";
-import { time } from "./time.schema";
+import { escalacao } from "./escalacao.schema.js";
+import { time } from "./time.schema.js";
 
 import {
   pgTable,

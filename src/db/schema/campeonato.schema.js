@@ -6,7 +6,8 @@ import {
     timestamp,
     unique,
     foreignKey,
-    pgEnum
+    pgEnum,
+    
   } from "drizzle-orm/pg-core";
   
   import { usuario } from "./usuario.schema.js";

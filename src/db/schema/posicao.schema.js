@@ -2,7 +2,7 @@
 import {
     pgTable,
     uuid,
-    varchar
+    varchar,
   } from "drizzle-orm/pg-core";
   
   export const posicao = pgTable("posicao", {
