@@ -1,4 +1,4 @@
-
+import { giro } from "./giro.schema.js";
 import {
     pgTable,
     uuid,
@@ -12,7 +12,7 @@ import {
   import { usuario } from "./usuario.schema.js";
   import { formacao } from "./formacao.schema.js";
   import { posicao } from "./posicao.schema.js";
-  
+  import { sql } from "drizzle-orm";
   export const escalacaoStatusEnum = pgEnum(
     "escalacao_status",
     ["EM_ANDAMENTO", "FINALIZADA"]
@@ -49,37 +49,54 @@ import {
   ]);
   
   export const escalacaoAtleta = pgTable(
-    "escalacao_atleta",
-    {
-      id: uuid("id").defaultRandom().primaryKey(),
-  
-      escalacaoId: uuid("escalacao_id").notNull(),
-  
-      posicaoId: uuid("posicao_id").notNull(),
-  
-      giroId: uuid("giro_id").notNull()
-    },
-    (table) => [
-      unique("escalacao_atleta_giro_unique").on(
-        table.giroId
-      ),
-  
-      unique("escalacao_atleta_posicao_unique").on(
-        table.escalacaoId,
-        table.posicaoId
-      ),
-  
-      foreignKey({
-        columns: [table.escalacaoId],
-        foreignColumns: [escalacao.id],
-        name: "escalacao_atleta_escalacao_fk"
-      }),
-  
-      foreignKey({
-        columns: [table.posicaoId],
-        foreignColumns: [posicao.id],
-        name: "escalacao_atleta_posicao_fk"
-      })
-    ]
-  );
-  
+  "escalacao_atleta",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+
+    escalacaoId: uuid("escalacao_id").notNull(),
+
+    posicaoId: uuid("posicao_id").notNull(),
+
+    giroId: uuid("giro_id").notNull(),
+
+    numeroVaga: integer("numero_vaga").notNull()
+  },
+  (table) => [
+    // Impede utilizar o mesmo giro mais de uma vez
+    unique("escalacao_atleta_giro_unique").on(
+      table.giroId
+    ),
+
+    // Permite duas vagas para a mesma posição,
+    // desde que tenham números diferentes
+    unique("escalacao_atleta_vaga_unique").on(
+      table.escalacaoId,
+      table.posicaoId,
+      table.numeroVaga
+    ),
+
+    // As vagas podem ser numeradas de 1 a 2
+    check(
+      "escalacao_atleta_numero_vaga_check",
+      sql`${table.numeroVaga} BETWEEN 1 AND 2`
+    ),
+
+    foreignKey({
+      columns: [table.escalacaoId],
+      foreignColumns: [escalacao.id],
+      name: "escalacao_atleta_escalacao_fk"
+    }),
+
+    foreignKey({
+      columns: [table.posicaoId],
+      foreignColumns: [posicao.id],
+      name: "escalacao_atleta_posicao_fk"
+    }),
+
+    foreignKey({
+      columns: [table.giroId],
+      foreignColumns: [giro.id],
+      name: "escalacao_atleta_giro_fk"
+    })
+  ]
+);

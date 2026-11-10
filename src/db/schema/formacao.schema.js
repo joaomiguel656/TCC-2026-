@@ -49,9 +49,9 @@ import {
         name: "formacao_posicao_posicao_fk"
       }),
   
-      check(
-        "formacao_posicao_quantidade_check",
-        sql`${table.quantidade} > 0`
+     check(
+    "formacao_posicao_quantidade_check",
+    sql`${table.quantidade} > 0`
       )
     ]
   );

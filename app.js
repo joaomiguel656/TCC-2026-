@@ -1,3 +1,0 @@
-const authRoutes = require('./modules/auth/auth.routes');
-// ...
-app.use('/auth', authRoutes);

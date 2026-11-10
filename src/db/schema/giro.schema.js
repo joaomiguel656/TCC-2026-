@@ -1,55 +1,45 @@
+
 import { escalacao } from "./escalacao.schema";
+import { time } from "./time.schema";
+
 import {
   pgTable,
   uuid,
-  varchar,
   integer,
-  unique,
+  boolean,
   foreignKey,
-  check
+  unique
 } from "drizzle-orm/pg-core";
 
-
-export const escalacaoAtleta = pgTable(
-  "escalacao_atleta",
+export const giro = pgTable(
+  "giro",
   {
     id: uuid("id").defaultRandom().primaryKey(),
 
     escalacaoId: uuid("escalacao_id").notNull(),
 
-    posicaoId: uuid("posicao_id").notNull(),
+    timeId: uuid("time_id").notNull(),
 
-    giroId: uuid("giro_id").notNull(),
+    numero: integer("numero").notNull(),
 
-    numeroVaga: integer("numero_vaga").notNull()
+    eRegiro: boolean("e_regiro").notNull().default(false)
   },
   (table) => [
-    unique("escalacao_atleta_giro_unique").on(
-      table.giroId
-    ),
-
-    unique("escalacao_atleta_vaga_unique").on(
+    unique("giro_escalacao_numero_unique").on(
       table.escalacaoId,
-      table.posicaoId,
-      table.numeroVaga
+      table.numero
     ),
 
     foreignKey({
       columns: [table.escalacaoId],
       foreignColumns: [escalacao.id],
-      name: "escalacao_atleta_escalacao_fk"
+      name: "giro_escalacao_fk"
     }),
 
     foreignKey({
-      columns: [table.posicaoId],
-      foreignColumns: [posicao.id],
-      name: "escalacao_atleta_posicao_fk"
-    }),
-
-    foreignKey({
-      columns: [table.giroId],
-      foreignColumns: [giro.id],
-      name: "escalacao_atleta_giro_fk"
+      columns: [table.timeId],
+      foreignColumns: [time.id],
+      name: "giro_time_fk"
     })
   ]
 );
