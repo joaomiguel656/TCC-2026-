@@ -15,6 +15,11 @@ router.get("/usuario/:usuarioId", (req, res, next) =>
   escalacaoController.getByUsuario(req, res, next)
 );
 
+router.patch("/:id/finalizar", (req, res, next) =>
+  escalacaoController.finalizar(req, res, next)
+);
+
+
 // Buscar escalação pelo ID
 router.get("/:id", (req, res, next) =>
   escalacaoController.getById(req, res, next)
@@ -34,5 +39,6 @@ router.put("/:id", (req, res, next) =>
 router.delete("/:id", (req, res, next) =>
   escalacaoController.delete(req, res, next)
 );
+
 
 export default router;

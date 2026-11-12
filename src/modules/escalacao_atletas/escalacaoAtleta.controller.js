@@ -56,21 +56,6 @@ class EscalacaoAtletaController {
     }
   }
 
-  async delete(req, res, next) {
-    try {
-      const { id } = req.params;
-
-      await escalacaoAtletaService.delete(id);
-
-      return res.status(200).json({
-        mensagem: "Registro removido da escalação com sucesso!"
-      });
-
-    } catch (error) {
-      next(error);
-    }
-  }
-
 }
 
 export default new EscalacaoAtletaController();

@@ -92,6 +92,22 @@ class EscalacaoController {
     }
   }
 
+
+  async finalizar(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const escalacaoFinalizada = await escalacaoService.finalizar(id);
+
+    return res.status(200).json({
+      mensagem: "Escalação finalizada com sucesso!",
+      escalacao: escalacaoFinalizada
+    });
+
+  } catch (error) {
+    next(error);
+  }
+}
 }
 
 export default new EscalacaoController();

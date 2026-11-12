@@ -1,8 +1,8 @@
-
 import giroService from "./giro.service.js";
 
 class GiroController {
 
+  // Listar todos os giros
   async getAll(req, res, next) {
     try {
       const giros = await giroService.getAll();
@@ -13,6 +13,7 @@ class GiroController {
     }
   }
 
+  // Buscar um giro pelo ID
   async getById(req, res, next) {
     try {
       const { id } = req.params;
@@ -25,13 +26,12 @@ class GiroController {
     }
   }
 
+  // Listar os giros de uma escalação
   async getByEscalacao(req, res, next) {
     try {
       const { escalacaoId } = req.params;
 
-      const giros = await giroService.getByEscalacao(
-        escalacaoId
-      );
+      const giros = await giroService.getByEscalacao(escalacaoId);
 
       return res.status(200).json(giros);
     } catch (error) {
@@ -39,6 +39,7 @@ class GiroController {
     }
   }
 
+  // Registrar um novo giro
   async create(req, res, next) {
     try {
       const novoGiro = await giroService.create(req.body);
@@ -46,20 +47,6 @@ class GiroController {
       return res.status(201).json({
         mensagem: "Giro registrado com sucesso!",
         giro: novoGiro
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async delete(req, res, next) {
-    try {
-      const { id } = req.params;
-
-      await giroService.delete(id);
-
-      return res.status(200).json({
-        mensagem: "Giro excluído com sucesso!"
       });
     } catch (error) {
       next(error);

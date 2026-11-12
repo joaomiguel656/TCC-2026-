@@ -1,0 +1,1425 @@
+{
+  "version": "8",
+  "dialect": "postgres",
+  "id": "74074d0e-6db6-4680-9f0d-7efe05536410",
+  "prevIds": [
+    "5986adbf-3b48-4580-ae1d-8771565269f1"
+  ],
+  "ddl": [
+    {
+      "values": [
+        "AGUARDANDO",
+        "EM_ANDAMENTO",
+        "FINALIZADO"
+      ],
+      "name": "campeonato_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "EM_ANDAMENTO",
+        "FINALIZADA"
+      ],
+      "name": "escalacao_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "AGUARDANDO",
+        "FINALIZADA"
+      ],
+      "name": "partida_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "atleta",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "campeonato",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "campeonato_participante",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "escalacao_atleta",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "escalacao",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "formacao",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "formacao_posicao",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "giro",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "partida",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "posicao",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "time",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "usuario",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "atleta"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "time_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "atleta"
+    },
+    {
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nome",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "atleta"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nota",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "atleta"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato"
+    },
+    {
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nome",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato"
+    },
+    {
+      "type": "campeonato_status",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'AGUARDANDO'",
+      "generated": null,
+      "identity": null,
+      "name": "status",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "data_criacao",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "campeonato_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "usuario_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "escalacao_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "escalacao_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "posicao_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "giro_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "numero_vaga",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "usuario_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "formacao_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nome",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "type": "escalacao_status",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'EM_ANDAMENTO'",
+      "generated": null,
+      "identity": null,
+      "name": "status",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "criada_em",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "formacao"
+    },
+    {
+      "type": "varchar(20)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nome",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "formacao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "formacao_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "posicao_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "quantidade",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "escalacao_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "time_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "numero",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "e_regiro",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "giro_anterior_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "campeonato_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "participante_a_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "participante_b_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "vencedor_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "placar_a",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "placar_b",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "rodada",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "partida_status",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'AGUARDANDO'",
+      "generated": null,
+      "identity": null,
+      "name": "status",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "criada_em",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "posicao"
+    },
+    {
+      "type": "varchar(50)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nome",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "posicao"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "time"
+    },
+    {
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nome",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "time"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "ano",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "time"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "usuario"
+    },
+    {
+      "type": "varchar(100)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nome",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "usuario"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "email",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "usuario"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "senha",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "usuario"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "criado_em",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "usuario"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "time_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "time",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "atleta_time_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "atleta"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "campeonato_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "campeonato",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "campeonato_participante_campeonato_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "usuario_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "usuario",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "campeonato_participante_usuario_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "escalacao_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "escalacao",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "campeonato_participante_escalacao_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "escalacao_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "escalacao",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "escalacao_atleta_escalacao_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "posicao_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "posicao",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "escalacao_atleta_posicao_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "giro_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "giro",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "escalacao_atleta_giro_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "usuario_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "usuario",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "escalacao_usuario_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "formacao_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "formacao",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "escalacao_formacao_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "escalacao"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "formacao_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "formacao",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "formacao_posicao_formacao_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "posicao_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "posicao",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "formacao_posicao_posicao_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "escalacao_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "escalacao",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "giro_escalacao_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "time_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "time",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "giro_time_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "giro_anterior_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "giro",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "giro_anterior_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "campeonato_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "campeonato",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "partida_campeonato_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "participante_a_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "campeonato_participante",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "partida_participante_a_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "participante_b_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "campeonato_participante",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "partida_participante_b_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "vencedor_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "campeonato_participante",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "partida_vencedor_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "atleta_pkey",
+      "schema": "public",
+      "table": "atleta",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "campeonato_pkey",
+      "schema": "public",
+      "table": "campeonato",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "campeonato_participante_pkey",
+      "schema": "public",
+      "table": "campeonato_participante",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "escalacao_atleta_pkey",
+      "schema": "public",
+      "table": "escalacao_atleta",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "escalacao_pkey",
+      "schema": "public",
+      "table": "escalacao",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "formacao_pkey",
+      "schema": "public",
+      "table": "formacao",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "formacao_posicao_pkey",
+      "schema": "public",
+      "table": "formacao_posicao",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "giro_pkey",
+      "schema": "public",
+      "table": "giro",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "partida_pkey",
+      "schema": "public",
+      "table": "partida",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "posicao_pkey",
+      "schema": "public",
+      "table": "posicao",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "time_pkey",
+      "schema": "public",
+      "table": "time",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "usuario_pkey",
+      "schema": "public",
+      "table": "usuario",
+      "entityType": "pks"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "campeonato_id",
+        "usuario_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "campeonato_usuario_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "campeonato_id",
+        "escalacao_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "campeonato_escalacao_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "campeonato_participante"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "giro_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "escalacao_atleta_giro_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "escalacao_id",
+        "posicao_id",
+        "numero_vaga"
+      ],
+      "nullsNotDistinct": false,
+      "name": "escalacao_atleta_vaga_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "formacao_id",
+        "posicao_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "formacao_posicao_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "escalacao_id",
+        "numero"
+      ],
+      "nullsNotDistinct": false,
+      "name": "giro_escalacao_numero_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "nome",
+        "ano"
+      ],
+      "nullsNotDistinct": false,
+      "name": "time_nome_ano_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "time"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "nome"
+      ],
+      "nullsNotDistinct": false,
+      "name": "formacao_nome_key",
+      "schema": "public",
+      "table": "formacao",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "nome"
+      ],
+      "nullsNotDistinct": false,
+      "name": "posicao_nome_key",
+      "schema": "public",
+      "table": "posicao",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "email"
+      ],
+      "nullsNotDistinct": false,
+      "name": "usuario_email_key",
+      "schema": "public",
+      "table": "usuario",
+      "entityType": "uniques"
+    },
+    {
+      "value": "\"nota\" BETWEEN 1 AND 99",
+      "name": "atleta_nota_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "atleta"
+    },
+    {
+      "value": "\"numero_vaga\" BETWEEN 1 AND 2",
+      "name": "escalacao_atleta_numero_vaga_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "escalacao_atleta"
+    },
+    {
+      "value": "\"quantidade\" > 0",
+      "name": "formacao_posicao_quantidade_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "formacao_posicao"
+    },
+    {
+      "value": "\"e_regiro\" = (\"giro_anterior_id\" IS NOT NULL)",
+      "name": "giro_regiro_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "giro"
+    },
+    {
+      "value": "\"participante_a_id\" <> \"participante_b_id\"",
+      "name": "partida_participantes_diferentes",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "value": "\"placar_a\" IS NULL OR \"placar_a\" >= 0",
+      "name": "partida_placar_a_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "value": "\"placar_b\" IS NULL OR \"placar_b\" >= 0",
+      "name": "partida_placar_b_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "partida"
+    },
+    {
+      "value": "\"rodada\" > 0",
+      "name": "partida_rodada_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "partida"
+    }
+  ],
+  "renames": []
+}

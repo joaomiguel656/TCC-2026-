@@ -35,9 +35,22 @@ class AtletaService {
   }
 
   async create(dados) {
+
+    // Valida os dados antes de acessar suas propriedades
+    if (!dados || typeof dados !== "object" || Array.isArray(dados)) {
+      throw Object.assign(
+        new Error("Os dados enviados são inválidos."),
+        { status: 400 }
+      );
+    }
+
     const { timeId, nome, nota } = dados;
 
-    if (!timeId || !nome || !nome.trim()) {
+    if (
+      !timeId ||
+      typeof nome !== "string" ||
+      !nome.trim()
+    ) {
       throw Object.assign(
         new Error("Time e nome do atleta são obrigatórios."),
         { status: 400 }
@@ -75,6 +88,15 @@ class AtletaService {
   }
 
   async update(id, dados) {
+
+    // Valida os dados antes de acessar suas propriedades
+    if (!dados || typeof dados !== "object" || Array.isArray(dados)) {
+      throw Object.assign(
+        new Error("Os dados enviados são inválidos."),
+        { status: 400 }
+      );
+    }
+
     await this.getById(id);
 
     const dadosAtualizados = {};
@@ -131,10 +153,7 @@ class AtletaService {
       );
     }
 
-    return await atletaRepository.update(
-      id,
-      dadosAtualizados
-    );
+    return await atletaRepository.update(id, dadosAtualizados);
   }
 
   async delete(id) {

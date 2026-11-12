@@ -2,7 +2,7 @@
 import { eq, and } from "drizzle-orm";
 
 import { db } from "../../config/database.js";
-import { escalacaoAtleta } from "../../db/schema/escalacaoAtleta.schema.js";
+import { escalacaoAtleta } from "../../db/schema/escalacao-atleta.schema.js";
 
 class EscalacaoAtletaRepository {
 
@@ -58,15 +58,6 @@ async findByEscalacaoEPosicao(escalacaoId, posicaoId) {
       .returning();
 
     return result[0];
-  }
-
-  async delete(id) {
-    const result = await db
-      .delete(escalacaoAtleta)
-      .where(eq(escalacaoAtleta.id, id))
-      .returning();
-
-    return result[0] || null;
   }
 
 }

@@ -4,10 +4,12 @@ import posicaoRepository from "../posicoes/posicao.repository.js";
 
 class FormacaoService {
 
+  // Busca todas as formações
   async getAll() {
     return await formacaoRepository.findAll();
   }
 
+  // Busca uma formação pelo ID
   async getById(id) {
     const formacao = await formacaoRepository.findById(id);
 
@@ -19,6 +21,20 @@ class FormacaoService {
     }
 
     return formacao;
+  }
+
+  // Valida o objeto recebido
+  validarDados(dados) {
+    if (
+      !dados ||
+      typeof dados !== "object" ||
+      Array.isArray(dados)
+    ) {
+      throw Object.assign(
+        new Error("Dados da formação inválidos."),
+        { status: 400 }
+      );
+    }
   }
 
   // Valida o nome da formação
@@ -44,6 +60,7 @@ class FormacaoService {
 
   // Valida as posições e suas quantidades
   async validarPosicoes(posicoes) {
+
     if (!Array.isArray(posicoes) || posicoes.length === 0) {
       throw Object.assign(
         new Error("Informe as posições da formação."),
@@ -57,6 +74,19 @@ class FormacaoService {
 
     for (const item of posicoes) {
 
+      // Verifica se o item é válido
+      if (
+        !item ||
+        typeof item !== "object" ||
+        Array.isArray(item)
+      ) {
+        throw Object.assign(
+          new Error("Uma das posições informadas é inválida."),
+          { status: 400 }
+        );
+      }
+
+      // Verifica se possui um ID
       if (!item.posicaoId) {
         throw Object.assign(
           new Error("Toda posição precisa possuir um posicaoId."),
@@ -64,17 +94,19 @@ class FormacaoService {
         );
       }
 
+      // Verifica a quantidade de vagas
       if (
         !Number.isInteger(item.quantidade) ||
-        item.quantidade <= 0
+        item.quantidade < 1 ||
+        item.quantidade > 2
       ) {
         throw Object.assign(
-          new Error("A quantidade de cada posição deve ser um inteiro positivo."),
+          new Error("Cada posição deve possuir entre 1 e 2 vagas."),
           { status: 400 }
         );
       }
 
-      // Impede repetir a mesma categoria
+      // Impede repetir a mesma posição
       if (posicoesUtilizadas.has(item.posicaoId)) {
         throw Object.assign(
           new Error("Uma posição não pode ser repetida na mesma formação."),
@@ -98,7 +130,7 @@ class FormacaoService {
       totalVagas += item.quantidade;
     }
 
-    // Toda formação precisa possuir 11 jogadores
+    // Toda formação precisa possuir exatamente 11 jogadores
     if (totalVagas !== 11) {
       throw Object.assign(
         new Error(
@@ -111,9 +143,14 @@ class FormacaoService {
     return posicoes;
   }
 
+  // Cria uma formação
   async create(dados) {
+
+    this.validarDados(dados);
+
     const nome = this.validarNome(dados.nome);
 
+    // Verifica se o nome já está cadastrado
     const formacaoExistente =
       await formacaoRepository.findByNome(nome);
 
@@ -124,23 +161,33 @@ class FormacaoService {
       );
     }
 
+    // Valida as posições
     const posicoes = await this.validarPosicoes(dados.posicoes);
 
+    // Cria a formação e suas posições
     return await formacaoRepository.create(
       { nome },
       posicoes
     );
   }
 
+  // Atualiza uma formação
   async update(id, dados) {
+
     await this.getById(id);
 
+    this.validarDados(dados);
+
     const dadosAtualizados = {};
+
     let posicoes = undefined;
 
+    // Verifica se o nome foi informado
     if (dados.nome !== undefined) {
+
       const nome = this.validarNome(dados.nome);
 
+      // Verifica se outra formação utiliza o mesmo nome
       const formacaoExistente =
         await formacaoRepository.findByNome(nome);
 
@@ -154,10 +201,12 @@ class FormacaoService {
       dadosAtualizados.nome = nome;
     }
 
+    // Verifica se as posições foram informadas
     if (dados.posicoes !== undefined) {
       posicoes = await this.validarPosicoes(dados.posicoes);
     }
 
+    // Verifica se existe algo para atualizar
     if (
       Object.keys(dadosAtualizados).length === 0 &&
       posicoes === undefined
@@ -175,7 +224,9 @@ class FormacaoService {
     );
   }
 
+  // Exclui uma formação
   async delete(id) {
+
     await this.getById(id);
 
     return await formacaoRepository.delete(id);
