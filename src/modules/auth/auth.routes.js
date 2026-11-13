@@ -1,11 +1,14 @@
-const { Router } = require('express');
-const validate = require('../../shared/middlewares/validate');
-const controller = require('./auth.controller');
-const { registerSchema, loginSchema } = require('../../db/schema/auth.schema');
+
+import { Router } from "express";
+
+import controller from "./auth.controller.js";
 
 const router = Router();
 
-router.post('/register', validate(registerSchema), controller.register);
-router.post('/login', validate(loginSchema), controller.login);
+// Registrar usuário
+router.post("/register", controller.register);
 
-module.exports = router;
+// Realizar login
+router.post("/login", controller.login);
+
+export default router;

@@ -1,0 +1,11 @@
+export default {
+    testEnvironment: "node",
+  
+    transform: {},
+  
+    testMatch: [
+      "**/*.test.js"
+    ],
+  
+    verbose: true
+  };
